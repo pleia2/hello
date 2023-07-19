@@ -15,9 +15,26 @@ jobs:
             gotestsum --junitfile /tmp/test-reports/unit-tests.xml
       - store_test_results:
           path: /tmp/test-reports
-
+  s390x-build:
+    machine: true
+    resource_class: NAME/s390x_rhel91
+    steps:
+      - checkout
+      - run:
+          name: Install requirements
+          command: |
+            go mod init hello
+            go install gotest.tools/gotestsum@latest
+      - run:
+          name: Run tests
+          command: |
+            mkdir -p /tmp/test-reports
+            ~/go/bin/gotestsum --junitfile /tmp/test-reports/unit-tests.xml
+      - store_test_results:
+          path: /tmp/test-reports
 # Invoke jobs via workflows
 workflows:
   functional:
     jobs:
       - build
+      - s390x-build
