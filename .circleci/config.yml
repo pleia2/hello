@@ -49,6 +49,7 @@ jobs:
             ~/go/bin/gotestsum --junitfile /tmp/test-reports/unit-tests.xml
       - store_test_results:
           path: /tmp/test-reports
+
 # Invoke jobs via workflows
 workflows:
   functional:
