@@ -34,7 +34,7 @@ jobs:
           path: /tmp/test-reports
   arm64-build:
     machine: true
-    resource_class: pleia2/arm64_debian
+    resource_class: pleia2/arm64-debian
     steps:
       - checkout
       - run:
